@@ -9,6 +9,6 @@ package scent;
  *
  * @author Foklourng
  */
-class Hbox {
+public class TestFile {
     
 }
