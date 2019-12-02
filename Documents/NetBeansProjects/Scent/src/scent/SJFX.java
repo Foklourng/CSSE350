@@ -32,6 +32,7 @@ import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle; 
 import javafx.scene.image.ImageView; 
 import java.util.Calendar;
+import javafx.collections.FXCollections;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.GridPane;
 /**
@@ -40,13 +41,24 @@ import javafx.scene.layout.GridPane;
  */
 public class SJFX extends Application{
     Button button, butt2,butt3,butt4;
-    Button buttW1,buttW2,buttW3,buttW4,buttW5,backB,update;
-    String pre_clear ="", pre_rain="", pre_cloud="",pre_snow="",pre_thunder="";
+    Button buttW1,buttW2,buttW3,buttW4,buttW5,backB,update,TimerDone;
+    String pre_clear ="Lemon", pre_rain="Eucalyptus", pre_cloud="Cinnamon",pre_snow="Spearmint",pre_thunder="Grass";
     String scentN1="Lemon",scentN2="Grass",scentN3="Eucalyptus",scentN4="Cinnamon",scentN5="Spearmint";
+    String TimeIn1="",TimeIn2="",TimeIn3="";
     Stage window;
-    Scene scene1, scene2,scene3;
+    Scene scene1, scene2,scene3,scene4;
+    String[] ScSet = new String[]{"Lemon","Eucalyptus","Cinnamon","Spearmint","Grass"};//All available scent or user prefer scents
+   // String[] scAll= new String[]{"Lemon","Eucalyptus","Cinnamon","Spearmint","Grass"};
     SCENT obj1 = new SCENT();
     
+    ChoiceBox<String> choicebox1 = new ChoiceBox<>();
+    ChoiceBox<String> choicebox2 = new ChoiceBox<>();
+    ChoiceBox<String> choicebox3 = new ChoiceBox<>();
+    ChoiceBox<String> choicebox4 = new ChoiceBox<>();
+    ChoiceBox<String> choicebox5 = new ChoiceBox<>();
+     
+    
+    Label l5;
     /**
      *
      * @param args
@@ -67,7 +79,7 @@ public class SJFX extends Application{
         Label l2 = new Label("Current Weather in "+ obj1.city + " , " + obj1.country ); 
         Label l3 = new Label(obj1.WTD + " Temp : " + obj1.temp + " F"); 
         Label l4 = new Label(getDate_Time()); 
-        Label l5 = new Label("Recommended Scent: " + getScent(obj1.WT));
+        l5 = new Label("Recommended Scent: " + getScent(obj1.WT));
         
         String img1,img2,img3,img4,img5;
         
@@ -80,7 +92,7 @@ public class SJFX extends Application{
         
         
         //User Input
-        TextInputDialog td = new TextInputDialog("Enter Event");
+       // TextInputDialog td = new TextInputDialog("Enter Event");
         
        //Weathre condition image checker 
        Image image;
@@ -97,7 +109,7 @@ public class SJFX extends Application{
        else if(obj1.WT.equals("Thunderstorm"))
            image = new Image(new FileInputStream(img5));
        else 
-           image = new Image(new FileInputStream("C:\\Users\\muy heng\\Desktop\\sunny.png"));
+           image = new Image(new FileInputStream(img2));
 
         
              
@@ -134,6 +146,7 @@ public class SJFX extends Application{
         button.setPadding(new Insets(10,60,10,60));
         button.setOnAction(e ->{
             //System.out.println("Hi there");
+            window.setScene(scene4);
         } );
         
         butt3 = new Button("Edit Scent");
@@ -141,6 +154,7 @@ public class SJFX extends Application{
        // butt3.setAlignment(Pos.TOP_LEFT);
        butt3.setPadding(new Insets(10,60,10,60));
         butt3.setOnAction(e ->{
+            //UpdateScentSet();
            window.setScene(scene2);
            //td.showAndWait();// Show pop up window to get inputs
             
@@ -181,25 +195,25 @@ public class SJFX extends Application{
       
         
       
-      ChoiceBox<String> choicebox1 = new ChoiceBox<>();
-      choicebox1.getItems().addAll("Lemon","Eucalyptus","Cinnamon","Spearmint","Grass");
-      choicebox1.setValue("Lemon");
+      //ChoiceBox<String> choicebox1 = new ChoiceBox<>();
+      choicebox1.getItems().addAll(ScSet[0],ScSet[1],ScSet[2],ScSet[3],ScSet[4]);
+      choicebox1.setValue(ScSet[0]);
       
-      ChoiceBox<String> choicebox2 = new ChoiceBox<>();
-      choicebox2.getItems().addAll("Lemon","Eucalyptus","Cinnamon","Spearmint","Grass");
-      choicebox2.setValue("Eucalyptus");
+      //ChoiceBox<String> choicebox2 = new ChoiceBox<>();
+      choicebox2.getItems().addAll(ScSet[0],ScSet[1],ScSet[2],ScSet[3],ScSet[4]);
+      choicebox2.setValue(ScSet[1]);
       
-      ChoiceBox<String> choicebox3 = new ChoiceBox<>();
-      choicebox3.getItems().addAll("Lemon","Eucalyptus","Cinnamon","Spearmint","Grass");
-      choicebox3.setValue("Cinnamon");
+      //ChoiceBox<String> choicebox3 = new ChoiceBox<>();
+      choicebox3.getItems().addAll(ScSet[0],ScSet[1],ScSet[2],ScSet[3],ScSet[4]);
+      choicebox3.setValue(ScSet[2]);
       
-      ChoiceBox<String> choicebox4 = new ChoiceBox<>();
-      choicebox4.getItems().addAll("Lemon","Eucalyptus","Cinnamon","Spearmint","Grass");
-      choicebox4.setValue("Spearmint");
+      //ChoiceBox<String> choicebox4 = new ChoiceBox<>();
+      choicebox4.getItems().addAll(ScSet[0],ScSet[1],ScSet[2],ScSet[3],ScSet[4]);
+      choicebox4.setValue(ScSet[3]);
       
-      ChoiceBox<String> choicebox5 = new ChoiceBox<>();
-      choicebox5.getItems().addAll("Lemon","Eucalyptus","Cinnamon","Spearmint","Grass");
-      choicebox5.setValue("Grass");
+      //ChoiceBox<String> choicebox5 = new ChoiceBox<>();
+      choicebox5.getItems().addAll(ScSet[0],ScSet[1],ScSet[2],ScSet[3],ScSet[4]);
+      choicebox5.setValue(ScSet[4]);
       
         buttW1 = new Button("Clear");
         //buttW1.setGraphic(new ImageView(image1));
@@ -238,17 +252,20 @@ public class SJFX extends Application{
             //System.out.println("Hi there");
         } );
         
+        //Finish Editing Scent
         backB = new Button("Done");
         backB.setPadding(new Insets(10,40,10,40));
         backB.setOnAction(e ->{
+            
             pre_clear = choicebox1.getValue();
             pre_rain = choicebox2.getValue();
             pre_cloud = choicebox3.getValue();
             pre_snow = choicebox4.getValue();
             pre_thunder = choicebox5.getValue();
+            UpdateScentRecom();
            window.setScene(scene1);
          
-           System.out.println(pre_clear + " " + pre_rain + " " + pre_cloud + " " + pre_snow + " "  + pre_thunder);
+           System.out.println(pre_clear + " ," + pre_rain + " ," + pre_cloud + " ," + pre_snow + " ,"  + pre_thunder);
         } );
         
         grid.add(buttW1, 0, 0);
@@ -280,37 +297,39 @@ public class SJFX extends Application{
         Label Sl5 = new Label("SCENT 5");
 
         ChoiceBox<String> scent1 = new ChoiceBox<>();
-        scent1.getItems().addAll("Lemon","Eucalyptus","Cinnamon","Spearmint","Grass");
-        scent1.setValue("Lemon");
+        scent1.getItems().addAll("Lemon","Eucalyptus","Cinnamon","Spearmint","Grass","Ham","Apple","Pineapple","Coffe","Chocolate");
+        scent1.setValue(ScSet[0]);
 
         ChoiceBox<String> scent2 = new ChoiceBox<>();
-        scent2.getItems().addAll("Lemon","Eucalyptus","Cinnamon","Spearmint","Grass");
-        scent2.setValue("Eucalyptus");
+        scent2.getItems().addAll("Lemon","Eucalyptus","Cinnamon","Spearmint","Grass","Ham","Apple","Pineapple","Coffe","Chocolate");
+        scent2.setValue(ScSet[1]);
 
         ChoiceBox<String> scent3 = new ChoiceBox<>();
-        scent3.getItems().addAll("Lemon","Eucalyptus","Cinnamon","Spearmint","Grass");
-        scent3.setValue("Cinnamon");
+        scent3.getItems().addAll("Lemon","Eucalyptus","Cinnamon","Spearmint","Grass","Ham","Apple","Pineapple","Coffe","Chocolate");
+        scent3.setValue(ScSet[2]);
 
         ChoiceBox<String> scent4 = new ChoiceBox<>();
-        scent4.getItems().addAll("Lemon","Eucalyptus","Cinnamon","Spearmint","Grass");
-        scent4.setValue("Spearmint");
+        scent4.getItems().addAll("Lemon","Eucalyptus","Cinnamon","Spearmint","Grass","Ham","Apple","Pineapple","Coffe","Chocolate");
+        scent4.setValue(ScSet[3]);
 
         ChoiceBox<String> scent5 = new ChoiceBox<>();
-        scent5.getItems().addAll("Lemon","Eucalyptus","Cinnamon","Spearmint","Grass");
-        scent5.setValue("Grass");
+        scent5.getItems().addAll("Lemon","Eucalyptus","Cinnamon","Spearmint","Grass","Ham","Apple","Pineapple","Coffe","Chocolate");
+        scent5.setValue(ScSet[4]);
         
-        update = new Button("Scent Info");
+        
         update = new Button("Update");
         update.setPadding(new Insets(10,40,10,40));
         update.setOnAction(e ->{
-            scentN1 = scent1.getValue();
-            scentN2 = scent2.getValue();
-            scentN3 = scent3.getValue();
-            scentN4 = scent4.getValue();
-            scentN5 = scent5.getValue();
+            ScSet[0] = scent1.getValue();
+            ScSet[1] = scent2.getValue();
+            ScSet[2] = scent3.getValue();
+            ScSet[3] = scent4.getValue();
+            ScSet[4] = scent5.getValue();
+            
+            UpdateScentSet();
            window.setScene(scene1);
          
-           System.out.println(scentN1 + " " + scentN2 + " " + scentN3 + " " + scentN4 + " "  + scentN5);
+           System.out.println(ScSet[0] + " " + ScSet[1] + " " + ScSet[2] + " " + ScSet[3] + " "  + ScSet[4]);
         } );
         
         grid3.add(Sl1, 0, 0);
@@ -326,6 +345,53 @@ public class SJFX extends Application{
         grid3.add(scent5,1,4);
         
         scene3 = new Scene(grid3, 350,400);
+        
+        
+        //Scene4
+        GridPane grid4 = new GridPane();
+        grid4.setAlignment(Pos.CENTER);
+        grid4.setVgap(10);
+        grid4.setHgap(10);
+        grid4.setPadding(new Insets(10));
+
+        Label T1 = new Label("Timer 1"); //Scent lable
+        Label T2 = new Label("Timer 2" ); 
+        Label T3 = new Label("Timer 3"); 
+
+        ChoiceBox<String> Tr1 = new ChoiceBox<>();
+        Tr1.getItems().addAll("6:00 am","8:00 am","10:00 am","12:00 pm","2:00 pm","4:00 pm.","6:00 pm","8:00 pm","10:00 pm");
+        Tr1.setValue("6:00 am");
+
+        ChoiceBox<String> Tr2 = new ChoiceBox<>();
+        Tr2.getItems().addAll("6:00 am","8:00 am","10:00 am","12:00 pm","2:00 pm","4:00 pm.","6:00 pm","8:00 pm","10:00 pm");
+        Tr2.setValue("12:00 pm");
+
+        ChoiceBox<String> Tr3 = new ChoiceBox<>();
+        Tr3.getItems().addAll("6:00 am","8:00 am","10:00 am","12:00 pm","2:00 pm","4:00 pm.","6:00 pm","8:00 pm","10:00 pm");
+        Tr3.setValue("6:00 pm");
+
+        
+        
+        TimerDone = new Button("Update");
+        TimerDone.setPadding(new Insets(10,40,10,40));
+        TimerDone.setOnAction(e ->{
+            TimeIn1 = Tr1.getValue();
+            TimeIn2 = Tr2.getValue();
+            TimeIn3 = Tr3.getValue();
+           window.setScene(scene1);
+         
+           System.out.println(TimeIn1 + " " + TimeIn2 + " " + TimeIn3);
+        } );
+        
+        grid4.add(T1, 0, 0);
+        grid4.add(T2, 0, 1);
+        grid4.add(T3, 0, 2);
+        grid4.add(TimerDone, 1,3);
+        grid4.add(Tr1,1,0);
+        grid4.add(Tr2,1,1);
+        grid4.add(Tr3,1,2);
+        
+        scene4 = new Scene(grid4, 350,400);
         
         
         window.setScene(scene1);
@@ -347,21 +413,53 @@ public class SJFX extends Application{
     public String getScent(String condi){
         String con= "";
         if(condi.equals("Clear"))
-            con= "Lemon";
-        
-        else if(condi.equals("Clouds"))
-            con= "Eucalyptus";
+            con= pre_clear;
         else if(condi.equals("Rain")||condi.equals("Drizzle"))
-            con= "Cinnamon";
+            con= pre_rain;
+        else if(condi.equals("Clouds"))
+            con= pre_cloud;
+        
         else if(condi.equals("Snow"))
-            con= "Spearmint";
+            con= pre_snow;
         else if(condi.equals("thunderstorm"))
-            con= "Spearmint";
+            con= pre_thunder;
         
         return con;
     }
     
-    public void getChoice(ChoiceBox<String> choicebox4){
+    public void UpdateScentRecom(){
+        l5.setText("Recommended Scent: " + getScent(obj1.WT));
+    }
+    
+    public void UpdateScentSet(){
+        System.out.println(ScSet[0] + " + " + ScSet[1] + " + " + ScSet[2] + " + " + ScSet[3] + " + " + ScSet[4]);
+        
+        //choicebox1 = new ChoiceBox(FXCollections.observableArrayList(ScSet));
+        //choicebox1.setValue(ScSet[0]);
+        choicebox1.getItems().clear();
+      choicebox1.getItems().addAll(ScSet[0],ScSet[1],ScSet[2],ScSet[3],ScSet[4]);
+     
+      
+      //choicebox2 = new ChoiceBox<>();
+      choicebox2.getItems().clear();
+      choicebox2.getItems().addAll(ScSet[0],ScSet[1],ScSet[2],ScSet[3],ScSet[4]);
+      //choicebox2.setValue(ScSet[1]);
+      
+      //choicebox3 = new ChoiceBox<>();
+      choicebox3.getItems().clear();
+      choicebox3.getItems().addAll(ScSet[0],ScSet[1],ScSet[2],ScSet[3],ScSet[4]);
+      //choicebox3.setValue(ScSet[2]);
+      
+     // choicebox4 = new ChoiceBox<>();
+     choicebox4.getItems().clear();
+      choicebox4.getItems().addAll(ScSet[0],ScSet[1],ScSet[2],ScSet[3],ScSet[4]);
+     // choicebox4.setValue(ScSet[3]);
+      
+      //choicebox5 = new ChoiceBox<>();
+      choicebox5.getItems().clear();
+      choicebox5.getItems().addAll(ScSet[0],ScSet[1],ScSet[2],ScSet[3],ScSet[4]);
+      //choicebox5.setValue(ScSet[4]);
+       
     }
     
    
