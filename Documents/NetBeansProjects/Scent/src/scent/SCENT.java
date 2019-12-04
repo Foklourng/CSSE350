@@ -30,7 +30,7 @@ public class SCENT {
      * @param args the command line arguments
      */
     
-    public static Map<String,Object> jsonToMap(String str){
+    public static Map<String,Object> jsonToMap(String str) throws IOException{
         Map<String,Object> map = new Gson().fromJson(
                 str, new TypeToken<HashMap<String, Object>>() {}.getType());
     return map;
@@ -42,7 +42,7 @@ public class SCENT {
        
          String LOCATION="";
         Scanner scnr = new Scanner(System.in);
-        
+        try{
         System.out.println("Enter 'city,country'");
         LOCATION = scnr.nextLine();
         
@@ -53,7 +53,7 @@ public class SCENT {
         
         String urlStringF = "http://api.openweathermap.org/data/2.5/forecast?q=" + LOCATION + "&appid=" + API_KEY + "&units=imperial";
         
-                  try{
+                  
               StringBuilder result = new StringBuilder();
               URL url = new URL(urlString);
               URLConnection conn = url.openConnection();
@@ -100,12 +100,15 @@ public class SCENT {
          
 		}catch(IOException e)
                 {
-                    System.out.println(e.getMessage());
+                    //System.out.println(e.getMessage());
+                    System.out.println("Invalid Input");
+                    System.exit(0);
                 }        
+        }
         
         
         
-    }
+    
     
     
 }

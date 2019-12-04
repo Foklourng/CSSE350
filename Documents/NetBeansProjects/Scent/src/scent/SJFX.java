@@ -5,6 +5,9 @@
  */
 package scent;
 
+//Change all images directory to the project direcoty
+
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.text.DateFormat;
@@ -35,6 +38,8 @@ import java.util.Calendar;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.GridPane;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 /**
  *
  * @author Foklourng
@@ -65,7 +70,10 @@ public class SJFX extends Application{
      */
     public static void main(String[] args){
         launch(args);
-        
+        //assertEquals
+     JunitTesting test = new JunitTesting();
+     int output = test.square(5);
+     assertEquals(25, output);
     }
     
     public void start(Stage primaryStage) throws Exception{
@@ -83,11 +91,11 @@ public class SJFX extends Application{
         
         String img1,img2,img3,img4,img5;
         
-        img1 = "C:\\Users\\muy heng\\Desktop\\cloudy.png";
-        img2 = "C:\\Users\\muy heng\\Desktop\\sunny.png";
-        img3 = "C:\\Users\\muy heng\\Desktop\\rainy.png";
-        img4 = "C:\\Users\\muy heng\\Desktop\\snowy.png";
-        img5 = "C:\\Users\\muy heng\\Desktop\\thunder.png";
+        img1 = "C:\\Users\\muy heng\\Documents\\NetBeansProjects\\Scent\\Images\\cloudy.png";
+        img2 = "C:\\Users\\muy heng\\Documents\\NetBeansProjects\\Scent\\Images\\sunny.png";
+        img3 = "C:\\Users\\muy heng\\Documents\\NetBeansProjects\\Scent\\Images\\rainy.png";
+        img4 = "C:\\Users\\muy heng\\Documents\\NetBeansProjects\\Scent\\Images\\snowy.png";
+        img5 = "C:\\Users\\muy heng\\Documents\\NetBeansProjects\\Scent\\Images\\thunder.png";
         
         
         
@@ -221,35 +229,35 @@ public class SJFX extends Application{
         
         buttW1.setPadding(new Insets(10,40,10,40));
         buttW1.setOnAction(e ->{
-            //System.out.println("Hi there");
+             
         } );
         buttW2 = new Button("Rainy");
         //button.setStyle("-fx-background-color: #ff0000; ");
         
         buttW2.setPadding(new Insets(10,40,10,40));
         buttW2.setOnAction(e ->{
-            //System.out.println("Hi there");
+           
         } );
         buttW3 = new Button("Cloudy");
         //button.setStyle("-fx-background-color: #ff0000; ");
         
         buttW3.setPadding(new Insets(10,40,10,40));
         buttW3.setOnAction(e ->{
-            //System.out.println("Hi there");
+             
         } );
         buttW4 = new Button("Snow");
         //button.setStyle("-fx-background-color: #ff0000; ");
         
         buttW4.setPadding(new Insets(10,40,10,40));
         buttW4.setOnAction(e ->{
-            //System.out.println("Hi there");
+             
         } );
         buttW5 = new Button("Thunderstorm");
         //button.setStyle("-fx-background-color: #ff0000; ");
         
         buttW5.setPadding(new Insets(10,40,10,40));
         buttW5.setOnAction(e ->{
-            //System.out.println("Hi there");
+            
         } );
         
         //Finish Editing Scent

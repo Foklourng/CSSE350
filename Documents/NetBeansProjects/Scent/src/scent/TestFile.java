@@ -5,10 +5,22 @@
  */
 package scent;
 
+import static org.junit.Assert.*;
+
 /**
  *
  * @author Foklourng
  */
 public class TestFile {
-    
+ public void testApiInput(){
+     //JunitTesting test = new JunitTesting();
+     //assertEquals
+     JunitTesting test = new JunitTesting();
+     int output = test.square(5);
+     assertEquals(25, output);
+ }   
+ 
+ public int square(int a){
+     return a*a;
+ }
 }
