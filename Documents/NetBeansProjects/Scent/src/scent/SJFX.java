@@ -8,7 +8,11 @@ package scent;
 //Change all images directory to the project direcoty
 
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,6 +43,7 @@ public class SJFX extends Application{
     String pre_clear ="Lemon", pre_rain="Eucalyptus", pre_cloud="Cinnamon",pre_snow="Spearmint",pre_thunder="Peppermint";
     String scentN1="Lemon",scentN2="Peppermint",scentN3="Eucalyptus",scentN4="Cinnamon",scentN5="Spearmint";
     String TimeIn1="",TimeIn2="",TimeIn3="";
+    String city,country,weather,temp;
     Stage window;
     Scene scene1, scene2,scene3,scene4;
     String[] ScSet = new String[]{"Lemon","Eucalyptus","Cinnamon","Spearmint","Peppermint"};//All available scent or user prefer scents
@@ -73,12 +78,20 @@ public class SJFX extends Application{
         
         //run weather function
         obj1.weather();
+        
+        city=obj1.city;
+        country = obj1.country;
+        weather = obj1.WTD ;
+        temp = obj1.temp;
+        
+        //testing();
+        
         //Labels on Main scene
         Label title = new Label("SCENT STRATOSPHERE"); 
-        Label currWeather = new Label("Current Weather in "+ obj1.city + " , " + obj1.country ); 
-        Label weatherDisplay = new Label(obj1.WTD + " Temp: " + obj1.temp + " F"); 
+        Label currWeather = new Label("Current Weather in "+ city + " , " + country ); 
+        Label weatherDisplay = new Label(weather + " Temp: " + temp + " F"); 
         Label time = new Label(getDate_Time()); 
-        Label recScent = new Label("Recommended Scent: " + getScent(obj1.WT));
+        recScent = new Label("Current Scent: " + getScent(obj1.WT));
         
         //Images for the scene
         String img1,img2,img3,img4,img5;
@@ -304,13 +317,35 @@ public class SJFX extends Application{
         update = new Button("Update");
         update.setPadding(new Insets(10,40,10,40));
         update.setOnAction(e ->{
-            ScSet[0] = scent1.getValue();
-            ScSet[1] = scent2.getValue();
-            ScSet[2] = scent3.getValue();
-            ScSet[3] = scent4.getValue();
-            ScSet[4] = scent5.getValue();
+            boolean cond = false;
+            for(int i =0; i<ScSet.length;i++){
+                if(scent1.getValue().equals(ScSet[i])||scent2.getValue().equals(ScSet[i])||
+                        scent3.getValue().equals(ScSet[i])||scent4.getValue().equals(ScSet[i])
+                        ||scent5.getValue().equals(ScSet[i])){
+                    cond = true;
+                }else{
+                    cond = false;
+                    break;
+                }
+            }
+            if(cond){
+                ScSet[0] = scent1.getValue();
+                ScSet[1] = scent2.getValue();
+                ScSet[2] = scent3.getValue();
+                ScSet[3] = scent4.getValue();
+                ScSet[4] = scent5.getValue();
+            }else if(!cond){
+                ScSet[0] = scent1.getValue();
+                ScSet[1] = scent2.getValue();
+                ScSet[2] = scent3.getValue();
+                ScSet[3] = scent4.getValue();
+                ScSet[4] = scent5.getValue();
+                UpdateScentSet();
+            }
             
-            UpdateScentSet();
+            
+            
+            
            window.setScene(scene1);
          
            System.out.println(ScSet[0] + " " + ScSet[1] + " " + ScSet[2] + " " + ScSet[3] + " "  + ScSet[4]);
@@ -412,7 +447,7 @@ public class SJFX extends Application{
     }
     
     public void UpdateScentRecom(){
-        recScent.setText("Recommended Scent: " + getScent(obj1.WT));
+        recScent.setText("Current Scent: " + getScent(obj1.WT));
     }
     
     public void UpdateScentSet(){
@@ -442,6 +477,25 @@ public class SJFX extends Application{
       
        
     }
-    
+    public void testing() throws IOException{
+        BufferedReader br = null;
+        String read;
+        
+        try{
+            br = new BufferedReader(new FileReader("ExternalFile.txt"));
+        }catch(FileNotFoundException e){
+            System.out.println("There was a problem" + e);
+        }
+        
+        String arr[];
+        String spl = br.readLine();
+        arr = spl.split(",");
+        br.close();
+        
+        city = arr[0];
+        country = arr[1];
+        weather = arr[2];
+        temp = arr[3];
+    }
    
 }
